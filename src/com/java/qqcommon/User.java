@@ -16,6 +16,9 @@ public class User implements Serializable {
     private String userId; //用户Id
     private String passwd; //用户密码
 
+    //无参构造器
+    //为了UserClientService.java中使用
+    public User() {}
 
     //构造器，setter，getter方法
     //按alt+insert（ MAC 里使用组合键：Command+n）
