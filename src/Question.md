@@ -6,3 +6,8 @@
 - 无参构造器
 - Socket
 - new Socket(InetAddress.getByName("127.0.0.1"),9999);
+- Message message = (Message) objectInputStream.readObject(); 
+  - 有异常 -> 需要扩大异常信息
+  - 向下转型
+- 枚举/接口
+- public class ClientConnectServerThread extends Thread
