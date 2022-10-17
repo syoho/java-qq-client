@@ -1,5 +1,6 @@
 package com.java.qqclient.view;
 
+import com.java.qqclient.service.UserClientService;
 import com.java.qqclient.utils.Utility;
 
 //客户端的登录界面/菜单
@@ -8,6 +9,9 @@ public class QQView {
     //需要写在方法外面
     private boolean loop = true; //控制是否显示菜单
     private String key = ""; //接受用户的输入
+    private UserClientService userClientService = new UserClientService();
+    //需要使用 -> 把类写成属性
+
 
     //主方法-测试
     public static void main(String[] args) {
@@ -43,7 +47,7 @@ public class QQView {
                     //编写一个类【UserClientService】【用户登录/注册】【服务】
 
 
-                    if (true) {
+                    if (userClientService.checkUser(userId,passwd)) {
                         //二级菜单
                         System.out.println("==========Welcome User " + userId +" To Submenu==========");
                         //再次loop

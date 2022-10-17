@@ -11,3 +11,7 @@
   - 向下转型
 - 枚举/接口
 - public class ClientConnectServerThread extends Thread
+- HashMap
+- public static
+- serverSocket = new ServerSocket(9999);
+  - Socket socket = serverSocket.accept();
