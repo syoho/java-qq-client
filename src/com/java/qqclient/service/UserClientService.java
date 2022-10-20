@@ -7,6 +7,7 @@ import com.java.qqcommon.User;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 
@@ -87,4 +88,45 @@ public class UserClientService {
 
         return b;
     }
+
+    //向服务器端请求在线用户列表
+    public void onlineFriendList() {
+
+        //发送一个Message
+        //类型是MESSAGE_GET_ONLINE_FRIEND
+
+        //建对象
+        Message message = new Message();
+        //设置种类
+        message.setMesType(MessageType.MESSAGE_GET_ONLINE_FRIEND);
+
+        //准备发送给服务器
+        //应该得到当前线程的Socket - 对应的ObjectOutputSteam对象
+        //ManageClientConnectServerThread.getClientConnectServerThread(user.getUserId()) - 取得【线程】- 取得Socekt - 取得getOutputStream()
+        try {
+
+            //从管理线程的集合中 - 通过userId - 得到线程
+            ClientConnectServerThread clientConnectServerThread = ManageClientConnectServerThread.getClientConnectServerThread(user.getUserId());
+
+            //线程 - 关联的Socket
+            Socket socket = clientConnectServerThread.getSocket();
+
+            //Socket - OutputStream
+            OutputStream outputStream = socket.getOutputStream();
+
+            //OutputStream - ObjectOutputStream
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+
+            //发送一个Message对象
+            //向服务器要求在线用户列表
+            //ObjectOutputStream - writeObject() - message
+            objectOutputStream.writeObject(message);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
 }
