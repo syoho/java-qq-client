@@ -99,6 +99,7 @@ public class UserClientService {
         Message message = new Message();
         //设置种类
         message.setMesType(MessageType.MESSAGE_GET_ONLINE_FRIEND);
+        message.setSender(user.getUserId());
 
         //准备发送给服务器
         //应该得到当前线程的Socket - 对应的ObjectOutputSteam对象

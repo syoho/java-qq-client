@@ -42,7 +42,7 @@ public class ClientConnectServerThread extends Thread{
                     String[] onlineUsers = message.getContent().split("--");
 
                     //提示
-                    System.out.println("==========User List==========");
+                    System.out.println("\n==========User List==========");
 
                     //居然又要用到for循环
                     for (int i = 0; i < onlineUsers.length; i++) {
