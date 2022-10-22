@@ -76,6 +76,8 @@ public class QQView {
                                     System.out.println("发送文件");
                                     break;
                                 case "9":
+                                    //调用方法，给服务器发送一个退出系统的Message
+                                    userClientService.logout();
                                     loop = false;
                                     break;
                             }
@@ -90,11 +92,6 @@ public class QQView {
                     loop = false;
                     break;
             }
-
-
-
-
-
 
         }
 

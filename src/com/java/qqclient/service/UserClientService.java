@@ -4,6 +4,7 @@ import com.java.qqcommon.Message;
 import com.java.qqcommon.MessageType;
 import com.java.qqcommon.User;
 
+import java.awt.*;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -126,8 +127,30 @@ public class UserClientService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    //编写方法 - 退出客户端 - 给服务器发送一个退出系统的Message对象
+    public void logout() {
+
+        //构建Message对象
+        Message message = new Message();
+        message.setMesType(MessageType.MESSAGE_CLIENT_EXIT);
+        message.setSender(user.getUserId()); //指定是哪个客户端
+
+        //发送Message
+        try {
+            //ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+            ObjectOutputStream objectOutputStream =
+                    new ObjectOutputStream(ManageClientConnectServerThread.getClientConnectServerThread(user.getUserId()).getSocket().getOutputStream());
+            objectOutputStream.writeObject(message);
+            System.out.println(user.getUserId() + "退出系统");
+            System.exit(0); //结束进程
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
     }
+
 
 }
