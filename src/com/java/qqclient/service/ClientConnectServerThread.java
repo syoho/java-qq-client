@@ -49,7 +49,14 @@ public class ClientConnectServerThread extends Thread{
                         System.out.println("用户：" + onlineUsers[i]);
                     }
 
-                } else {
+                } else if (message.getMesType().equals(MessageType.MESSAGE_COMM_MES)){ //普通的聊天消息类型
+
+                    //把服务器转发的消息，直接显示控制器
+                    System.out.println("\n" + message.getSender()
+                            + "对" + message.getGetter() + "说：" + message.getContent());
+                }
+
+                else {
                     System.out.println("其他类型的Message，暂不处理……");
                 }
 

@@ -148,9 +148,6 @@ public class UserClientService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
-
 
 }

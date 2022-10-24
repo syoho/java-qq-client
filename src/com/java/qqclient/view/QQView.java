@@ -1,5 +1,6 @@
 package com.java.qqclient.view;
 
+import com.java.qqclient.service.MessageClientService;
 import com.java.qqclient.service.UserClientService;
 import com.java.qqclient.utils.Utility;
 
@@ -9,7 +10,8 @@ public class QQView {
     //需要写在方法外面
     private boolean loop = true; //控制是否显示菜单
     private String key = ""; //接受用户的输入
-    private UserClientService userClientService = new UserClientService();
+    private UserClientService userClientService = new UserClientService(); //对象用于登录服务/注册用户
+    private MessageClientService messageClientService = new MessageClientService(); //对象用于用户私聊/群聊
     //需要使用 -> 把类写成属性
 
 
@@ -70,7 +72,13 @@ public class QQView {
                                     System.out.println("群发消息");
                                     break;
                                 case "3":
-                                    System.out.println("私聊消息");
+                                    //System.out.println("私聊消息");
+                                    System.out.println("请输入想聊天的用户号（在线用户）：");
+                                    String getterId = Utility.readString(30);
+                                    System.out.println("请输入消息：");
+                                    String content = Utility.readString(100);
+                                    //编写方法，将消息发送给服务端
+                                    messageClientService.sendMessageToOne(content, userId, getterId);
                                     break;
                                 case "4":
                                     System.out.println("发送文件");
