@@ -69,7 +69,11 @@ public class QQView {
                                     userClientService.onlineFriendList();
                                     break;
                                 case "2":
-                                    System.out.println("群发消息");
+                                    //System.out.println("群发消息");
+                                    System.out.println("请输入群聊消息：");
+                                    String groupChat = Utility.readString(100);
+                                    //调用一个方法，将消息封装Message
+                                    messageClientService.sendMessageToAll(groupChat, userId);
                                     break;
                                 case "3":
                                     //System.out.println("私聊消息");

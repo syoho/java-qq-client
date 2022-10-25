@@ -30,6 +30,8 @@ public class ClientConnectServerThread extends Thread{
         while (true) {
 
             try {
+                //从信息通道收到ObjectInputStream
+                //转为Message
                 System.out.println("客户端线程，等待读取从服务器发来的消息");
                 ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
                 Message message = (Message) objectInputStream.readObject(); //如果服务器没有发来Message对象，线程会阻塞
@@ -54,9 +56,13 @@ public class ClientConnectServerThread extends Thread{
                     //把服务器转发的消息，直接显示控制器
                     System.out.println("\n" + message.getSender()
                             + "对" + message.getGetter() + "说：" + message.getContent());
-                }
+                } else if (message.getMesType().equals(MessageType.MESSAGE_TO_ALL_MES)){ //群聊消息类型
 
-                else {
+                    //把服务器转发的消息，直接显示控制器
+                    System.out.println("\n" + message.getSender()
+                            + "对所有人说：" + message.getContent());
+
+                } else {
                     System.out.println("其他类型的Message，暂不处理……");
                 }
 
