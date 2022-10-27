@@ -4,6 +4,8 @@ package com.java.qqclient.service;
 import com.java.qqcommon.Message;
 import com.java.qqcommon.MessageType;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
@@ -62,7 +64,19 @@ public class ClientConnectServerThread extends Thread{
                     System.out.println("\n" + message.getSender()
                             + "对所有人说：" + message.getContent());
 
-                } else {
+                } else if (message.getMesType().equals(MessageType.MESSAGE_FILE_MES)) {
+
+                    System.out.println("\n" + message.getSender() + "给" + message.getGetter() + "发文件：" + message.getSrc() + "到电脑目录" + message.getDest());
+
+                    //取出message的文件字节数组
+                    //通过文件输出流写出到磁盘
+                    FileOutputStream fileOutputStream = new FileOutputStream(message.getDest());
+                    fileOutputStream.write(message.getFileBytes());
+                    fileOutputStream.close();
+                    System.out.println("\n 保存文件成功");
+
+                }
+                else {
                     System.out.println("其他类型的Message，暂不处理……");
                 }
 

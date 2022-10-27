@@ -1,5 +1,6 @@
 package com.java.qqclient.view;
 
+import com.java.qqclient.service.FileClientService;
 import com.java.qqclient.service.MessageClientService;
 import com.java.qqclient.service.UserClientService;
 import com.java.qqclient.utils.Utility;
@@ -12,6 +13,7 @@ public class QQView {
     private String key = ""; //接受用户的输入
     private UserClientService userClientService = new UserClientService(); //对象用于登录服务/注册用户
     private MessageClientService messageClientService = new MessageClientService(); //对象用于用户私聊/群聊
+    private FileClientService fileClientService = new FileClientService(); //用于文件传输
     //需要使用 -> 把类写成属性
 
 
@@ -85,7 +87,13 @@ public class QQView {
                                     messageClientService.sendMessageToOne(content, userId, getterId);
                                     break;
                                 case "4":
-                                    System.out.println("发送文件");
+                                    System.out.println("请输入文件发送的目标用户（在线用户）：");
+                                    String fileGetterId = Utility.readString(30);
+                                    System.out.println("请输入文件发送的目录：");
+                                    String src = Utility.readString(100);
+                                    System.out.println("请输入文件传达的目标目录：");
+                                    String dest = Utility.readString(100);
+                                    fileClientService.sendToOne(src, dest, userId, fileGetterId);
                                     break;
                                 case "9":
                                     //调用方法，给服务器发送一个退出系统的Message
